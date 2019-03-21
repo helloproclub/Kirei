@@ -1,27 +1,38 @@
 import React, { Component } from 'react';
+import Button from './button/Button';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            isHidden: false
+        }
+    }
+
+    toogleHidden() {
+        this.setState(
+            prevState => ({ isHidden: !(prevState.isHidden) }))
+    }
+
+    render() {
+        let buttons = []
+
+        for (let i = 0; i < 10; i++) {
+            buttons.push(<Button name="danu"/>)
+        }
+
+        let nama = 'danu'
+        return (
+            <div className="App">
+                <Button name="World" sayHi={() => this.toogleHidden()}/>
+                { !this.state.isHidden ?
+                  <h1> Hi Everyone </h1> : '' }
+                { buttons.map(b => b) }
+            </div>
+        );
   }
 }
 
